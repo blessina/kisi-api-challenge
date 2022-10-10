@@ -11,6 +11,12 @@ class Pubsub
     client.topic(name) || client.create_topic(name)
   end
 
+  def subscription(name)
+    client.subscription(name) || topic(name).subscribe(name,
+      dead_letter_topic: topic('morgue'),
+      dead_letter_max_delivery_attempts: 2)
+  end
+
   private
 
   # Create a new client.
