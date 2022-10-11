@@ -1,4 +1,4 @@
-version: '2.2'
+version: "2.2"
 
 services:
   web:
@@ -17,7 +17,7 @@ services:
   worker:
     build:
       context: .
-    command: ["bin/rails", "worker:run"]
+    command: ["bin/rails", "worker:run[default]"]
     environment:
       - PUBSUB_EMULATOR_HOST=pubsub:8681
     volumes:
