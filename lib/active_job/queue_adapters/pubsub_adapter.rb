@@ -27,11 +27,11 @@ module ActiveJob
       private
 
       def pubsub
-        @client = Pubsub.new
+        @client ||= Pubsub.new
       end
 
       def topic(queue_name)
-        @topic = pubsub.topic(queue_name)
+        @topic ||= pubsub.topic(queue_name)
       end
     end
   end
