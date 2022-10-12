@@ -11,7 +11,6 @@ module ActiveJob
       def enqueue(job, params={})
         serialized_job = job.serialize
         serialized_job.merge(params)
-        # topic = pubsub.topic(job.queue_name)
         msg = topic(job.queue_name).publish(JSON.dump(serialized_job), params)
         job.provider_job_id = msg.message_id
       end
@@ -31,7 +30,7 @@ module ActiveJob
       end
 
       def topic(queue_name)
-        @topic ||= pubsub.topic(queue_name)
+        @topic = pubsub.topic(queue_name)
       end
     end
   end
